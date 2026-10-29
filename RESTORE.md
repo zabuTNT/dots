@@ -105,13 +105,10 @@ Da rifare o riscaricare:
 | Cosa | Come |
 |------|------|
 | Toolchain (`.nvm`, `.goenv`, `.sdkman`, `.rustup`, `uv`, `pnpm`) | `mise install` |
-| Modelli Ollama (`.ollama`, circa 30 GB) | reinstallare Ollama e riscaricare i modelli |
 | Android SDK, Android Studio, IDEA | reinstallare; l'SDK si riscarica dall'IDE |
 | Estensioni di Chrome | si ripristinano con la sincronizzazione dell'account Google |
 | Configurazione di pgAdmin e ClickUp | rifare a mano |
 | Cache, `snap/`, `.wine*`, `node_modules`, `target`, `.venv` | si rigenerano |
-| File `Graph.obj` di OpenTripPlanner | rigenerare i grafi |
-| Cartelle di root (per esempio volumi Docker) | rsync le salta con "Permission denied": copiarle con `sudo` se servono |
 
 L'elenco di ciò che era installato è in `/mnt/backup/manifest/` (`apt-manual.txt`,
 `flatpak.txt`, `npm-global.txt`, `uv-tools.txt`, `cargo.txt`, `vscode-extensions.txt`,
