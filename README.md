@@ -33,6 +33,8 @@ $EDITOR ~/.gitconfig.local      # nome, email, chiave di firma
 già presenti vengono spostati in `<file>.bak-<data>`, non sovrascritti.
 Si può installare un solo modulo: `./install.sh sway waybar`.
 
+Per ripristinare da un backup (`backup/backup.sh`) vedi [RESTORE.md](RESTORE.md).
+
 ## Versioni dei linguaggi (mise)
 
 `mise/config.toml` fissa i default globali. Nei progetti basta un `mise.toml`

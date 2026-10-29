@@ -28,9 +28,10 @@ if ! findmnt -n -T "$DEST" -o FSTYPE | grep -qx ext4; then
   exit 1
 fi
 
-# keep.txt va per primo: in rsync vince la prima regola che corrisponde
+# keep.local (non versionato, vedi keep.example) va per primo: in rsync vince la
+# prima regola che corrisponde
 args=(-aHAX --numeric-ids --info=stats2,progress2 --partial)
-args+=(--filter=". $HERE/keep.txt")
+[ -f "$HERE/keep.local" ] && args+=(--filter=". $HERE/keep.local")
 args+=(--exclude-from="$HERE/excludes.txt")
 [ "$DATA" = 0 ] && args+=(--exclude-from="$HERE/data-excludes.txt")
 [ "$RUN" = 0 ] && args+=(--dry-run)

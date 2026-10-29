@@ -1,0 +1,12 @@
+# Percorsi da copiare per intero, ignorando excludes.txt e data-excludes.txt.
+# Copia questo file in keep.local (non versionato) e adattalo: se keep.local
+# non esiste, il backup applica solo le esclusioni.
+#
+# Formato filtro rsync, valutato PRIMA delle esclusioni: vince la prima regola
+# che corrisponde, quindi le eccezioni vanno sopra. Percorsi relativi alla home.
+#   - pattern   esclude
+#   + pattern   include
+#
+# Esempio: tutta la cartella di un progetto, tranne i file di grafo generati.
+# - /Progetti/mio-progetto/dati/**/Graph.obj
+# + /Progetti/mio-progetto/dati/***

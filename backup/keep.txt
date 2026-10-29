@@ -1,7 +1,0 @@
-# Regole in formato filtro rsync, valutate PRIMA di excludes.txt (vince la prima
-# che corrisponde, quindi le eccezioni vanno sopra). Percorsi relativi alla home.
-#   - pattern   esclude
-#   + pattern   include
-- /Progetti/openmove/otp/Graph.obj
-- /Progetti/openmove/otp/**/Graph.obj
-+ /Progetti/openmove/otp/***
