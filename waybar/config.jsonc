@@ -1,0 +1,108 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 32,
+  "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
+  "modules-right": [
+    "cpu",
+    "disk",
+    "memory",
+    "custom/wireguard",
+    "custom/updates",
+    "custom/dnd",
+    "bluetooth",
+    "pulseaudio",
+    "backlight",
+    "custom/nightlight",
+    "battery",
+    "clock",
+    "tray"
+  ],
+
+  "sway/workspaces": {
+    "disable-scroll": false,
+    "format": "{name}"
+  },
+  "sway/scratchpad": {
+    "format": "{icon} {count}",
+    "show-empty": false,
+    "format-icons": ["", ""],
+    "on-click": "swaymsg scratchpad show"
+  },
+
+  "cpu": { "format": " {usage}%", "interval": 5 },
+  "memory": { "format": " {percentage}%", "format-alt": " swap {swapPercentage}%" },
+  "disk": {
+    "path": "/",
+    "format": " {free}",
+    "interval": 20,
+    "states": { "warning": 80, "critical": 90 }
+  },
+
+  "custom/wireguard": {
+    "exec": "ip -o link show wg0 >/dev/null 2>&1 && echo '{\"text\":\" WG\",\"class\":\"on\"}' || echo '{\"text\":\" WG\",\"class\":\"off\"}'",
+    "return-type": "json",
+    "interval": 5,
+    "on-click": "if ip -o link show wg0 >/dev/null 2>&1; then sudo -n wg-quick down wg0; else sudo -n wg-quick up wg0; fi"
+  },
+
+  "custom/updates": {
+    "exec": "n=$(dnf check-update -q --refresh=0 2>/dev/null | grep -cE '^[A-Za-z0-9_.+-]+\\.(x86_64|noarch|i686|aarch64) '); [ \"$n\" -gt 0 ] && echo \" $n\" || echo ''",
+    "interval": 1800,
+    "on-click": "kitty -e bash -lc 'sudo dnf upgrade; echo; read -p \"Invio per chiudere...\"'"
+  },
+
+  "custom/dnd": {
+    "exec": "makoctl mode | grep -q do-not-disturb && echo '{\"text\":\"\",\"class\":\"off\"}' || echo '{\"text\":\"\",\"class\":\"on\"}'",
+    "return-type": "json",
+    "interval": 5,
+    "on-click": "makoctl mode -t do-not-disturb",
+    "on-click-right": "makoctl restore"
+  },
+
+  "bluetooth": {
+    "format": " {status}",
+    "format-connected": " {num_connections}",
+    "format-off": " off",
+    "on-click": "blueman-manager",
+    "on-click-right": "bluetoothctl power off"
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": " mute",
+    "format-icons": { "default": ["", "", ""] },
+    "on-click": "pavucontrol",
+    "scroll-step": 5
+  },
+
+  "backlight": {
+    "format": " {percent}%",
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-"
+  },
+
+  "custom/nightlight": {
+    "exec": "k=$(~/.config/sway/scripts/nightlight.sh get); echo \" ${k}K\"",
+    "interval": 5,
+    "on-click": "~/.config/sway/scripts/nightlight.sh toggle",
+    "on-click-right": "~/.config/sway/scripts/nightlight.sh day",
+    "on-scroll-up": "~/.config/sway/scripts/nightlight.sh up",
+    "on-scroll-down": "~/.config/sway/scripts/nightlight.sh down"
+  },
+
+  "battery": {
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "states": { "warning": 25, "critical": 10 }
+  },
+
+  "clock": {
+    "locale": "it_IT.UTF-8",
+    "format": "{:%a %d/%m %R}",
+    "tooltip-format": "<tt>{calendar}</tt>"
+  },
+
+  "tray": { "spacing": 8 }
+}

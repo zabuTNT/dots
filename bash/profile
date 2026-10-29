@@ -1,0 +1,30 @@
+# ~/.profile (symlink verso questo file). Variabili d'ambiente per le sessioni di login.
+
+[ -n "$BASH_VERSION" ] && [ -r "$HOME/.bashrc" ] && . "$HOME/.bashrc"
+
+for d in "$HOME/bin" "$HOME/.local/bin" "$HOME/.cargo/bin"; do
+  [ -d "$d" ] && PATH="$d:$PATH"
+done
+unset d
+
+export PROMPT_DIRTRIM=2
+export EDITOR=vim
+
+# Android SDK (se presente)
+if [ -d "$HOME/Android/Sdk" ]; then
+  export ANDROID_HOME="$HOME/Android/Sdk"
+  export ANDROID_SDK_ROOT="$ANDROID_HOME"
+  PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+fi
+
+# Sway: forza le app Wayland dove supportato
+if [ "${XDG_SESSION_TYPE:-}" = wayland ]; then
+  export MOZ_ENABLE_WAYLAND=1
+  export QT_QPA_PLATFORM="wayland;xcb"
+  export ELECTRON_OZONE_PLATFORM_HINT=auto
+fi
+
+# Segreti: mai nel repo. Se esiste il file, lo si legge a runtime.
+[ -r "$HOME/.config/secrets/github_token" ] && GITHUB_TOKEN="$(cat "$HOME/.config/secrets/github_token")" && export GITHUB_TOKEN
+
+export PATH

@@ -1,0 +1,5 @@
+com.slack.Slack
+md.obsidian.Obsidian
+com.obsproject.Studio
+org.filezillaproject.Filezilla
+org.wireshark.Wireshark

@@ -1,0 +1,66 @@
+# Pattern rsync (relativi alla home). Cache e cose riscaricabili.
+
+# --- cache generiche ---
+.cache/
+.local/share/Trash/
+.local/state/
+.thumbnails/
+**/Cache/
+**/Code Cache/
+**/GPUCache/
+**/CacheStorage/
+**/Service Worker/
+**/ShaderCache/
+**/GrShaderCache/
+**/.cache/
+*.log
+
+# --- toolchain reinstallabili (da mise) ---
+.nvm/
+.goenv/
+.sdkman/
+.rustup/
+.cargo/registry/
+.cargo/git/
+.local/share/uv/
+.local/share/pnpm/
+.local/share/flatpak/
+.local/share/mise/
+.local/lib/ollama/
+.npm/
+.gradle/
+.m2/repository/
+.p2/
+.lemminx-maven/
+.espressif/
+.platformio/
+.meteor/
+.minikube/
+.amplify/
+.vscode/extensions/
+.cursor/extensions/
+
+# --- modelli e SDK enormi ---
+.ollama/
+Android/Sdk/
+snap/
+go/pkg/
+.wine/
+.wine-fmb/
+
+# --- build e dipendenze nei progetti ---
+node_modules/
+target/
+.venv/
+venv/
+__pycache__/
+.next/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- app con dati ricostruibili ---
+.config/google-chrome/*/Extensions/
+.config/pgadmin4/
+.config/ClickUp/
+.config/cef_user_data/

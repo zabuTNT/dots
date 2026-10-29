@@ -1,0 +1,4 @@
+# Dati rigenerabili (mappe, tile, grafi). Esclusi di default: usa --with-data per includerli.
+*.osm.pbf
+*.pmtiles
+*.mbtiles

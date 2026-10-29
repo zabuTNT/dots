@@ -1,0 +1,248 @@
+# Sway config: port del vecchio ~/.config/i3/config.
+# Mappa strumenti: dmenu->fuzzel, i3bar/i3status-rs->waybar, dunst->mako,
+# nitrogen->swaybg, i3lock/xautolock->swaylock/swayidle, scrot->grim+slurp,
+# xrandr/autorandr->kanshi, hueshift (xrandr gamma)->gammastep, clipit->cliphist,
+# xbacklight->brightnessctl, urxvt->kitty.
+
+set $mod Mod4
+set $term kitty
+set $menu fuzzel
+set $scripts ~/.config/sway/scripts
+
+font pango:Noto Sans 12
+
+floating_modifier $mod
+
+default_border pixel 1
+default_floating_border normal
+hide_edge_borders none
+
+# Il tasto a destra della L sulla tastiera italiana è ò (nel config i3 era ö)
+set $left j
+set $down k
+set $up l
+set $right ograve
+
+### Input ###
+input type:keyboard {
+    xkb_layout it
+}
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+    dwt enabled
+}
+
+### Output ###
+# Scala e posizione dei monitor sono gestite da kanshi (~/.config/kanshi/config).
+# Sfondo a tinta unita finché non scegli un'immagine:
+#   output * bg ~/Immagini/sfondo.jpg fill
+output * bg #002B36 solid_color
+
+### Applicazioni ###
+bindsym $mod+Return exec $term
+bindsym $mod+d exec $menu
+bindsym $mod+Shift+q kill
+
+bindsym $mod+F2 exec google-chrome
+bindsym $mod+F3 exec thunar
+bindsym $mod+c exec $term --class floating-calendar -e sh -c 'cal -3; read -r _'
+bindsym $mod+Ctrl+m exec pavucontrol
+bindsym $mod+Shift+d exec makoctl dismiss --all
+bindsym $mod+Ctrl+h exec cliphist list | fuzzel --dmenu | cliphist decode | wl-copy
+# Hook per script personali (es. apriporta): bindsym Pause exec ~/bin/miascript
+
+### Schermate ###
+bindsym Print exec $scripts/screenshot.sh full
+bindsym $mod+Print exec $scripts/screenshot.sh window
+bindsym $mod+Shift+Print exec $scripts/screenshot.sh area
+
+### Audio, luminosità, tastiera ###
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessUp exec brightnessctl set +10%
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+### Focus e spostamento ###
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+### Layout ###
+bindsym $mod+h splith
+bindsym $mod+v splitv
+bindsym $mod+q split toggle
+bindsym $mod+f fullscreen toggle
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+s sticky toggle
+bindsym $mod+a focus parent
+
+bindsym $mod+u border none
+bindsym $mod+y border pixel 1
+bindsym $mod+n border normal
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+### Workspace ###
+workspace_auto_back_and_forth yes
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+
+set $ws1 1:一
+set $ws2 2:二
+set $ws3 3:三
+set $ws4 4:四
+set $ws5 5:五
+set $ws6 6:六
+set $ws7 7:七
+set $ws8 8:八
+
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+
+bindsym $mod+Ctrl+1 move container to workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8
+
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+
+bindsym $mod+Shift+m move workspace to output right
+
+### Assegnazione finestre ###
+# Le app native Wayland espongono app_id, quelle via Xwayland la class.
+# Controlla con: swaymsg -t get_tree | grep -E 'app_id|class'
+assign [app_id="(?i)^google-chrome$"] workspace $ws2
+assign [class="(?i)^google-chrome$"] workspace $ws2
+assign [app_id="(?i)^thunar$"] workspace $ws3
+assign [class="(?i)^thunar$"] workspace $ws3
+assign [app_id="(?i)^slack$"] workspace $ws4
+assign [class="(?i)^slack$"] workspace $ws4
+assign [app_id="^(btop|ranger|ncmpcpp)$"] workspace $ws1
+
+### Finestre flottanti ###
+for_window [title="alsamixer"] floating enable, border pixel 1
+for_window [app_id="floating-calendar"] floating enable, border pixel 1
+for_window [app_id="(?i)pavucontrol"] floating enable
+for_window [app_id="(?i)blueman-manager"] floating enable
+for_window [app_id="(?i)nm-connection-editor"] floating enable
+for_window [app_id="(?i)org.gnome.Calculator"] floating enable, border pixel 1
+for_window [class="(?i)gnome-calculator"] floating enable, border pixel 1
+for_window [app_id="(?i)gparted"] floating enable
+for_window [title="File Transfer*"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [class="(?i)virtualbox"] floating enable, border normal
+for_window [urgent=latest] focus
+
+### Sessione ###
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+e exec swaynag -t warning -m 'Uscire da Sway? La sessione verrà chiusa.' -B 'Sì, esci' 'swaymsg exit'
+bindsym $mod+9 exec swaylock -f -c 002b36
+bindsym $mod+m bar mode toggle
+
+set $mode_system (l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+mode "$mode_system" {
+    bindsym l exec swaylock -f -c 002b36, mode "default"
+    bindsym e exec swaymsg exit, mode "default"
+    bindsym s exec systemctl suspend, mode "default"
+    bindsym h exec systemctl hibernate, mode "default"
+    bindsym r exec systemctl reboot, mode "default"
+    bindsym Shift+s exec systemctl poweroff, mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+0 mode "$mode_system"
+
+mode "resize" {
+    bindsym j resize shrink width 5 px or 5 ppt
+    bindsym k resize grow height 5 px or 5 ppt
+    bindsym l resize shrink height 5 px or 5 ppt
+    bindsym ograve resize grow width 5 px or 5 ppt
+
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+### Colori ###
+# class                 border  backgr. text    indic.  child_border
+client.focused          #808280 #808280 #80FFF9 #FDF6E3 #808280
+client.focused_inactive #434745 #434745 #16A085 #454948 #434745
+client.unfocused        #434745 #434745 #16A085 #454948 #434745
+client.urgent           #CB4B16 #FDF6E3 #16A085 #268BD2 #CB4B16
+client.placeholder      #000000 #0c0c0c #ffffff #000000 #0c0c0c
+client.background       #2B2C2B
+
+### Barra ###
+bar {
+    swaybar_command waybar
+}
+
+### Avvio ###
+# Variabili d'ambiente per portali e servizi systemd utente (screen sharing, file picker)
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway SWAYSOCK DISPLAY
+exec /usr/libexec/polkit-gnome-authentication-agent-1
+
+exec kanshi
+exec mako
+exec nm-applet --indicator
+exec wl-paste --watch cliphist store
+exec swayidle -w \
+    timeout 600 'swaylock -f -c 002b36' \
+    timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+    before-sleep 'swaylock -f -c 002b36'
+
+exec_always $scripts/nightlight.sh apply
+exec $scripts/session-startup.sh
+
+include /etc/sway/config.d/*

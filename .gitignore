@@ -1,0 +1,9 @@
+# Mai nel repo
+*.local
+*.pem
+*.key
+.env
+.env.*
+**/secrets/
+**/*token*
+*.bak-*

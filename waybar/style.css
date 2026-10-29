@@ -1,0 +1,45 @@
+* {
+  font-family: "Noto Sans", "Font Awesome 6 Free", "Noto Sans CJK JP";
+  font-size: 14px;
+  border: none;
+  border-radius: 0;
+}
+
+window#waybar {
+  background: #002b36;
+  color: #f9faf9;
+}
+
+#workspaces button {
+  padding: 0 8px;
+  color: #eee8d5;
+  background: transparent;
+}
+
+#workspaces button.focused {
+  background: #16a085;
+  color: #002b36;
+}
+
+#workspaces button.urgent {
+  background: #fdf6e3;
+  color: #e5201d;
+}
+
+#mode {
+  background: #cb4b16;
+  padding: 0 8px;
+}
+
+#cpu, #memory, #disk, #custom-wireguard, #custom-updates, #custom-dnd,
+#bluetooth, #pulseaudio, #backlight, #custom-nightlight, #battery,
+#clock, #tray, #scratchpad {
+  padding: 0 10px;
+}
+
+#custom-wireguard.on { color: #16a085; }
+#custom-wireguard.off { color: #595b5b; }
+#custom-dnd.off { color: #cb4b16; }
+#disk.warning, #battery.warning { color: #b58900; }
+#disk.critical, #battery.critical { color: #e5201d; }
+#battery.charging { color: #16a085; }

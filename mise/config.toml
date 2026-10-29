@@ -1,0 +1,24 @@
+# Versioni globali di default. Nei progetti si sovrascrive con un
+# mise.toml locale oppure con i file classici (.nvmrc, .python-version,
+# .go-version, .tool-versions), abilitati qui sotto.
+
+[settings]
+idiomatic_version_file_enable_tools = ["node", "python", "go"]
+
+[tools]
+node = "lts"
+python = "3.12"
+go = "1.25"
+rust = "stable"
+java = "temurin-21"
+
+uv = "latest"
+pnpm = "latest"
+
+# CLI di lavoro
+awscli = "latest"
+kubectl = "latest"
+helm = "latest"
+k9s = "latest"
+kubectx = "latest"
+gh = "latest"

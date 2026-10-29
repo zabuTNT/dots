@@ -1,0 +1,92 @@
+# Un pacchetto per riga. I nomi non trovati vengono saltati e segnalati
+# da post-install.sh: controlla l'output e correggi la lista.
+
+# Sway e dintorni
+sway
+swaylock
+swayidle
+swaybg
+waybar
+fuzzel
+mako
+kanshi
+wdisplays
+grim
+slurp
+wl-clipboard
+cliphist
+brightnessctl
+playerctl
+gammastep
+xdg-desktop-portal-wlr
+xdg-desktop-portal-gtk
+polkit-gnome
+NetworkManager-tui
+network-manager-applet
+blueman
+pavucontrol
+xdg-user-dirs
+
+# Terminale e strumenti da shell
+kitty
+btop
+htop
+ranger
+ncmpcpp
+mpd
+git
+git-lfs
+jq
+yq
+ripgrep
+fd-find
+fzf
+bat
+eza
+tmux
+neovim
+vim-enhanced
+wget
+curl
+rsync
+unzip
+p7zip
+wireguard-tools
+bind-utils
+nmap-ncat
+tree
+
+# Interfaccia grafica
+thunar
+thunar-archive-plugin
+file-roller
+vlc
+gimp
+libreoffice
+evince
+eog
+
+# Font
+google-noto-sans-fonts
+google-noto-sans-cjk-fonts
+google-noto-emoji-fonts
+fontawesome-6-free-fonts
+jetbrains-mono-fonts
+
+# Container
+podman
+podman-compose
+
+# Dipendenze di compilazione (mise compila Python da sorgente)
+gcc
+gcc-c++
+make
+cmake
+openssl-devel
+zlib-devel
+bzip2-devel
+readline-devel
+sqlite-devel
+libffi-devel
+xz-devel
+tk-devel

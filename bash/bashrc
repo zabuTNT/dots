@@ -1,0 +1,17 @@
+# ~/.bashrc (symlink verso questo file). Carica bash/rc.d/*.sh in ordine.
+
+case $- in
+  *i*) ;;
+  *) return ;;
+esac
+
+_dots="$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")")"
+
+for f in "$_dots"/bash/rc.d/*.sh; do
+  # shellcheck disable=SC1090
+  [ -r "$f" ] && . "$f"
+done
+unset f _dots
+
+# Cose specifiche della macchina (percorsi, alias personali): non versionato
+[ -r "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"

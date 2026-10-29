@@ -1,0 +1,7 @@
+[pull]
+	rebase = false
+[credential]
+	helper = cache --timeout=360000
+[include]
+	# nome, email e firma dei commit: vedi gitconfig.local.example
+	path = ~/.gitconfig.local
