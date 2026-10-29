@@ -1,16 +1,16 @@
-# dotfiles
+# dots
 
-Le mie configurazioni per Fedora + Sway, con gli script per il post-installazione.
-Niente segreti: nome, email, chiavi e token vivono in file `*.local` o fuori dal repo.
+Configurazioni per Fedora + Sway, con gli script per il post-installazione.
+Niente segreti: nome, email, chiavi e token si usano i file `*.local`.
 
 ## Contenuto
 
 | Cartella | Cosa fa |
 |----------|---------|
-| `sway/` | Config Sway (port del vecchio i3) e script: screenshot, night light, avvio sessione |
-| `waybar/` | Barra di stato (sostituisce i3status-rs) |
+| `sway/` | Config Sway e script: screenshot, night light, avvio sessione |
+| `waybar/` | Barra di stato  |
 | `mako/`, `fuzzel/` | Notifiche e launcher |
-| `kanshi/` | Profili monitor (sostituisce xrandr/autorandr) |
+| `kanshi/` | Profili monitor |
 | `kitty/` | Terminale |
 | `bash/` | `.bashrc` modulare (`rc.d/NN-*.sh`) e `.profile` |
 | `git/` | `.gitconfig` senza identità (vedi sotto) |
@@ -21,8 +21,8 @@ Niente segreti: nome, email, chiavi e token vivono in file `*.local` o fuori dal
 ## Su una macchina nuova
 
 ```sh
-git clone https://github.com/<utente>/dotfiles ~/Progetti/dotfiles
-cd ~/Progetti/dotfiles
+git clone https://github.com/<utente>/dots ~/Progetti/dots
+cd ~/Progetti/dots
 
 ./system/post-install.sh        # repo, pacchetti, flatpak, mise, servizi (usa sudo)
 ./install.sh                    # collega le config nella home
